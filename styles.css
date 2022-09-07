@@ -1,0 +1,168 @@
+:root {
+  --red: #FF3562;
+  --green: #5CAB7D;
+  --yellow: #E3D26F;
+  --blue: #2F97C1;
+  --white: #fff;
+  --grey: #c0c1c5;
+  --text: var(--gray-5);
+  --transition: 0.2s;
+  --valid: var(--green);
+  --invalid: var(--red);
+  --focus: var(--yellow);
+  --blur: var(--white);
+  --disabled: var(--grey);
+}
+
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing: border-box;
+}
+
+body,html, main{
+  height: 100%;
+}
+
+main {
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  background-color:#9EB3C2
+}
+
+form {
+  width: 100%;
+  max-width:400px;
+  color:white;
+  padding:30px;
+  background: #21295C;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  border-radius: 10px;
+}
+
+label {
+  font-family: sans-serif;
+  display: flex;
+  font-weight: bold;
+  padding-right: 1rem;
+  transform-style: preserve-3d;
+  transition: color var(--transition);
+  color: var(--color);
+  font-size: 1.25rem;
+  margin-bottom:7px;
+}
+
+input {
+  width: 100%;
+  border: 7px solid var(--color);
+  border-radius: 10px;
+  padding: 1rem 2rem;
+  font-weight: 400;
+  transition: border-color var(--transition);
+}
+
+input::placeholder {
+  color: transparent;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+
+input:focus-visible {
+  outline-color: var(--color);
+}
+
+input:focus{
+  outline-offset: 2px;
+}
+
+.form-group:has(:placeholder-shown) {
+  --color: var(--blur);
+}
+
+button {
+  padding: 1rem 2rem;
+  border-radius: 4px;
+  border: 0;
+  cursor: pointer;
+  background: var(--disabled);
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: var(--gray-5);
+  transition: color var(--transition), background var(--transition);
+}
+
+.form-group:has(:invalid){
+  --color: var(--invalid);
+}
+
+.form-group:has(:invalid:not(:focus)) {
+  animation: shake 0.65s;
+}
+
+.form-group:has(:focus) {
+  --color: var(--focus);
+}
+
+
+.form-group:has(:valid){
+  --color: var(--valid);
+}
+
+.form-group:has(:valid) span {
+  animation: twirl 1s calc(var(--index) * 0.1s);
+}
+
+
+.form-group:has(:placeholder-shown) {
+  --color: var(--blur);
+  animation:none
+}
+
+.form-group:has(:placeholder-shown:not(:focus)) {
+  animation:none
+}
+
+label span {
+  display: inline-block;
+}
+
+
+form:valid [type="submit"] {
+  background: var(--valid);
+  color: var(--gray-1);
+}
+
+@keyframes twirl {
+  100% {
+    transform: rotateY(360deg);
+  }
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  } 
+  20%, 40%, 60%, 80% {
+    transform: translateX(-4%);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(4%);
+  }
+}
